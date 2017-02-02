@@ -4,7 +4,7 @@ class CheckInButton extends Component {
   render () {
     return (
       <div>
-        <button onClick={this.props.handleCheckIn} disabled={this.props.checkedIn} className='check-in'>
+        <button type='button' onClick={this.props.handleCheckIn} disabled={this.props.checkedIn} className='check-in'>
           { this.props.checkedIn ? 'Checked In' : 'Check In' }
         </button>
       </div>

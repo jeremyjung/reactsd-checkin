@@ -4,21 +4,23 @@ import db from '../services/db'
 class CheckInPage extends Component {
 
   componentWillMount () {
-    console.log(this.props.match.params)
-    // const person = db.findPerson(this.props.match.params.personId)
-    // person ? this.setState({ person: person })
-    //        : this.setState({ person: undefined })
+    const person = db.findPerson(this.props.match.params.personId)
+    person ? this.setState({ person: person })
+           : this.setState({ person: undefined })
   }
 
   renderExistingPerson () {
     return (
-      <span>Hi {this.state.person.name}!  Let's check in.</span>
+      <div>
+        <span>Hi {this.state.person.name}!  Let's check you in.</span>
+        <button className='check-in'>Check in!</button>
+      </div>
     )
   }
 
   renderNewPerson () {
     return (
-      <span>Hello new person!  Let's get you registered.</span>
+      <span>You tried to check in, but it looks like you're new.</span>
     )
   }
 

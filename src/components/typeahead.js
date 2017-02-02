@@ -10,7 +10,7 @@ class Typeahead extends Component {
     this.state = {
       value: '',
       suggestions: [],
-      people: db.getPeople()
+      people: []
     }
 
     this.onInputChange = this.onInputChange.bind(this)
@@ -18,17 +18,28 @@ class Typeahead extends Component {
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
-  handleCheckIn (personId) {
-    db.checkIn(personId)
-    const people = db.getPeople()
+  componentWillMount() {
     this.setState({
-      people: people
+      people: db.getPeople()
     })
   }
 
+  handleCheckIn (personId) {
+    // console.log('checkin called')
+    // db.checkIn(personId)
+    // const people = db.getPeople()
+    // this.setState({
+    //   people: people
+    // })
+    this.props.push(`/checkin/${personId}`)
+  }
+
   handleSubmit (event) {
-    // console.log(this.props)
-    this.props.push(`/${this.state.value}`)
+    if (this.state.suggestions.length > 0) {
+      this.props.push(`/checkin/${this.state.suggestions[0].id}`)
+    }
+    else this.props.push(`/register/${this.state.value}`)
+    console.log(this.props)
     event.preventDefault()
   }
 

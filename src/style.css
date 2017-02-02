@@ -20,6 +20,7 @@ html {
 input {
 	width: 100%;
 	padding: 20px;
+	font-size: 20px;
 }
 
 .search-form {
@@ -77,6 +78,11 @@ button.new-user-button{
 }
 
 .check-in {
+	margin: 20px auto;
 	font-size: 25px;
 	font-weight: 100;
+}
+
+a.visited {
+	color: white;
 }

@@ -2,10 +2,12 @@ import React, { Component } from 'react'
 import {
   BrowserRouter as Router,
   Route,
-  Switch
+  Switch,
+  Link
 } from 'react-router-dom'
 import Typeahead from './components/typeahead'
 import CheckInPage from './components/checkInPage'
+import RegisterPage from './components/registerPage'
 import './style.css'
 
 class App extends Component {
@@ -15,10 +17,11 @@ class App extends Component {
       <Router>
         <div>
           <div className='App-header'>
-            <h1>React SD Check-in</h1>
+            <h1><Link to='/'>React SD Check-in</Link></h1>
           </div>
           <Switch>
-            <Route path={'/:personId'} component={CheckInPage} />
+            <Route path={'/checkin/:personId'} component={CheckInPage} />
+            <Route path={'/register/:personName'} component={RegisterPage} />
             <Route component={Typeahead} />
           </Switch>
         </div>
