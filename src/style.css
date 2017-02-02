@@ -27,6 +27,12 @@ input {
 	margin: 50px auto;
 }
 
+.checkin-form {
+	max-width: 400px;
+	margin: 50px auto;
+	text-align: center;
+}
+
 input.search {
 	margin: 0;
 	text-align: center;
@@ -63,6 +69,11 @@ input.search {
 span.name {
 	font-size: 25px;
 	font-weight: 100;
+}
+
+button.new-user-button{
+	font-size: 25px;
+	position: relative;
 }
 
 .check-in {

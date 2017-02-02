@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
 import {
   BrowserRouter as Router,
-  Route
+  Route,
+  Switch
 } from 'react-router-dom'
 import Typeahead from './components/typeahead'
+import CheckInPage from './components/checkInPage'
 import './style.css'
 
 class App extends Component {
@@ -15,7 +17,10 @@ class App extends Component {
           <div className='App-header'>
             <h1>React SD Check-in</h1>
           </div>
-          <Route component={Typeahead} />
+          <Switch>
+            <Route path={'/:personId'} component={CheckInPage} />
+            <Route component={Typeahead} />
+          </Switch>
         </div>
       </Router>
     )

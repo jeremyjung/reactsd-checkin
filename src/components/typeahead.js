@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { BrowserRouter as Router, withRouter } from 'react-router-dom'
 import Suggestions from './suggestions'
 import db from '../services/db'
 
@@ -14,6 +15,7 @@ class Typeahead extends Component {
 
     this.onInputChange = this.onInputChange.bind(this)
     this.handleCheckIn = this.handleCheckIn.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   handleCheckIn (personId) {
@@ -22,6 +24,12 @@ class Typeahead extends Component {
     this.setState({
       people: people
     })
+  }
+
+  handleSubmit (event) {
+    // console.log(this.props)
+    this.props.push(`/${this.state.value}`)
+    event.preventDefault()
   }
 
   findMatches (name) {
@@ -44,13 +52,14 @@ class Typeahead extends Component {
 
   render () {
     return (
-      <div className='search-form'>
+      <form onSubmit={this.handleSubmit} className='search-form'>
         <input type='text' value={this.state.value} className='search' placeholder='Enter name...' onChange={this.onInputChange} />
         <Suggestions suggestions={this.state.suggestions}
           handleCheckIn={this.handleCheckIn} />
-      </div>
+      </form>
     )
   }
 }
 
-export default Typeahead
+const TypeaheadWithRouter = withRouter(Typeahead)
+export default TypeaheadWithRouter
