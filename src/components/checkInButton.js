@@ -1,16 +1,13 @@
 import React, { Component } from 'react'
 
-class CheckInButton extends Component {
-  render () {
-    return (
-      <div>
-        <button type='button' onClick={this.props.handleCheckIn} disabled={this.props.checkedIn} className='check-in'>
-          { this.props.checkedIn ? 'Checked In' : 'Check In' }
-        </button>
-      </div>
-    )
-  }
-}
+const CheckInButton = ({checkedIn, handleCheckIn}) =>
+  (
+    <div>
+      <button type='button' onClick={handleCheckIn} disabled={checkedIn} className='check-in'>
+        { checkedIn ? 'Checked In' : 'Check In' }
+      </button>
+    </div>
+  )
 
 CheckInButton.PropTypes = {
   checkedIn: React.PropTypes.object.isRequired,

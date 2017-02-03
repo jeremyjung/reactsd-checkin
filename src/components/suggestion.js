@@ -1,29 +1,21 @@
 import React, { Component } from 'react'
 import CheckInButton from './checkInButton'
 
-class Suggestion extends Component {
+const Suggestion = ({ handleCheckIn, suggestion}) => {
 
-  constructor (props) {
-    super(props)
-    this.handleCheckIn = this.handleCheckIn.bind(this)
-  }
+  const handleCheckInClick = () => handleCheckIn(suggestion.id)
 
-  handleCheckIn () {
-    this.props.handleCheckIn(this.props.suggestion.id)
-  }
-
-  render () {
-    return (
-      <li>
-        <span className='name'>{this.props.suggestion.name}</span>
-        <CheckInButton checkedIn={this.props.suggestion.checkedIn} handleCheckIn={this.handleCheckIn} />
-      </li>
-    )
-  }
+  return (
+    <li>
+      <span className='name'>{suggestion.name}</span>
+      <CheckInButton checkedIn={suggestion.checkedIn} handleCheckIn={handleCheckInClick} />
+    </li>
+  )
 }
 
 Suggestion.PropTypes = {
-  handleCheckIn: React.PropTypes.func.isRequired
+  handleCheckIn: React.PropTypes.func.isRequired,
+  suggestion: React.PropTypes.func.isRequired
 }
 
 export default Suggestion

@@ -1,32 +1,30 @@
 import React, { Component } from 'react'
 import Suggestion from './suggestion'
 
-class Suggestions extends Component {
+const Suggestions = ({suggestions, handleCheckIn}) => {
 
-  renderSuggestions () {
-    if (this.props.suggestions.length === 0) return this.renderSuggestionsPlaceholder()
-    return this.props.suggestions.map(suggestion => this.renderSuggestion(suggestion))
+  const renderSuggestions = () => {
+    if (suggestions.length === 0) return renderSuggestionsPlaceholder()
+    return suggestions.map(suggestion => renderSuggestion(suggestion))
   }
 
-  renderSuggestion (suggestion) {
+  const renderSuggestion = (suggestion) => {
     return (
-      <Suggestion key={suggestion.id} suggestion={suggestion} handleCheckIn={this.props.handleCheckIn} />
+      <Suggestion key={suggestion.id} suggestion={suggestion} handleCheckIn={handleCheckIn} />
     )
   }
 
-  renderSuggestionsPlaceholder () {
+  const renderSuggestionsPlaceholder = () => {
     return (
       <li>Search for your name to check in</li>
     )
   }
 
-  render () {
-    return (
-      <ul className='suggestions'>
-        { this.renderSuggestions() }
-      </ul>
-    )
-  }
+  return (
+    <ul className='suggestions'>
+      { renderSuggestions() }
+    </ul>
+  )
 }
 
 Suggestions.PropTypes = {
