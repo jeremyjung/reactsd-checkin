@@ -37,4 +37,8 @@ class CheckInPage extends Component {
   }
 }
 
+CheckInPage.PropTypes = {
+  match: React.PropTypes.object.isRequired
+}
+
 export default CheckInPage

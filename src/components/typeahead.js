@@ -65,5 +65,9 @@ class Typeahead extends Component {
   }
 }
 
+Typeahead.PropTypes = {
+  push: React.PropTypes.func.isRequired
+}
+
 const TypeaheadWithRouter = withRouter(Typeahead)
 export default TypeaheadWithRouter

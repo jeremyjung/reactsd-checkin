@@ -93,4 +93,8 @@ class RegisterPage extends Component {
   }
 }
 
+RegisterPage.PropTypes = {
+  match: React.PropTypes.object.isRequired
+}
+
 export default RegisterPage

@@ -22,4 +22,8 @@ class Suggestion extends Component {
   }
 }
 
+Suggestion.PropTypes = {
+  handleCheckIn: React.PropTypes.func.isRequired
+}
+
 export default Suggestion
