@@ -1,4 +1,5 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
+import Field from './field'
 
 class RegisterPage extends Component {
 
@@ -8,31 +9,79 @@ class RegisterPage extends Component {
       fields: {
         name: props.match.params.personName,
         email: ''
-      }
+      },
+      fieldErrors: {}
     }
 
     this.onInputChange = this.onInputChange.bind(this)
+    this.onFormSubmit = this.onFormSubmit.bind(this)
   }
 
-  onInputChange (event) {
+  onInputChange ({ name, value, error }) {
     const fields = this.state.fields
-    fields[event.target.id] = event.target.value
+    const fieldErrors = this.state.fieldErrors
+
+    fields[name] = value
+    fieldErrors[name] = error
+
+    this.setState({ fields, fieldErrors })
+  }
+
+  onFormSubmit (event) {
+    const person = this.state.fields
+
+    event.preventDefault()
+
+    if (this.validate()) return
+
     this.setState({
-      fields: fields
+      fields: {
+        name: '',
+        email: ''
+      }
     })
   }
 
-  handleSubmit (event) {
-    event.preventDefault()
+  isValidEmail(email) {
+    const emailRegex = /\S+@\S+\.\S+/
+    return emailRegex.test(email)
+  }
+
+  validate() {
+    const person = this.state.fields
+    const fieldErrors = this.state.fieldErrors
+    const errMessages = Object.keys(fieldErrors).filter(k => fieldErrors[k])
+
+    if (!person.name) return true
+    if (!person.email) return true
+    if (errMessages.length) return true
+
+    return false
   }
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit} className='search-form'>
+      <form onSubmit={this.onFormSubmit} className='search-form'>
         <label htmlFor='name'>Name</label>
-        <input type='text' id='name' value={this.state.fields.name} onChange={this.onInputChange} />
+        <Field
+          placeholder='Name'
+          name='name'
+          type='text'
+          value={this.state.fields.name}
+          onChange={this.onInputChange}
+          validate={(val) => (val ? false : 'Name Required')}
+        />
         <label htmlFor='email'>Email</label>
-        <input type='email' id='email' value={this.state.fields.email} onChange={this.onInputChange} />
+        <Field
+          placeholder='Email'
+          name='email'
+          type='email'
+          value={this.state.fields.email}
+          onChange={this.onInputChange}
+          validate={val => this.isValidEmail(val) ? false : 'Invalid Email'}
+        />
+
+        <input type='submit' disabled={this.validate()} />
       </form>
     );
   }

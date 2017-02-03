@@ -86,3 +86,8 @@ button.new-user-button{
 a.visited {
 	color: white;
 }
+
+.validation-error {
+	font-size: 20px;
+	color: red;
+}
