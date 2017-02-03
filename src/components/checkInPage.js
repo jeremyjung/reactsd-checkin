@@ -5,15 +5,19 @@ class CheckInPage extends Component {
 
   componentWillMount () {
     const person = db.findPerson(this.props.match.params.personId)
-    person ? this.setState({ person: person })
-           : this.setState({ person: undefined })
+    if (person) {
+      db.checkInPersonById(person.id)
+      this.setState({ person: person })
+    }
+    else {
+      this.setState({ person: undefined })
+    }
   }
 
   renderExistingPerson () {
     return (
       <div>
-        <span>Hi {this.state.person.name}!  Let's check you in.</span>
-        <button className='check-in'>Check in!</button>
+        <span>Hi {this.state.person.name}!  Thanks for checking in. You're now entered into the raffle!</span>
       </div>
     )
   }

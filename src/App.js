@@ -17,7 +17,7 @@ class App extends Component {
       <Router>
         <div>
           <div className='App-header'>
-            <h1><Link to='/'>React SD Check-in</Link></h1>
+            <h1><Link className='checkin-header' to='/'>React SD Check-in</Link></h1>
           </div>
           <Switch>
             <Route path={'/checkin/:personId'} component={CheckInPage} />

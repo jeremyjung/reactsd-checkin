@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Field from './field'
+import db from '../services/db'
 
 class RegisterPage extends Component {
 
@@ -10,7 +11,8 @@ class RegisterPage extends Component {
         name: props.match.params.personName,
         email: ''
       },
-      fieldErrors: {}
+      fieldErrors: {},
+      registrationComplete: false
     }
 
     this.onInputChange = this.onInputChange.bind(this)
@@ -34,12 +36,16 @@ class RegisterPage extends Component {
 
     if (this.validate()) return
 
+    db.registerPerson(person)
+
     this.setState({
       fields: {
         name: '',
         email: ''
-      }
+      },
+      registrationComplete: true
     })
+
   }
 
   isValidEmail(email) {

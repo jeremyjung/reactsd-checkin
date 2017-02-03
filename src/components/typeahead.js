@@ -25,12 +25,6 @@ class Typeahead extends Component {
   }
 
   handleCheckIn (personId) {
-    // console.log('checkin called')
-    // db.checkIn(personId)
-    // const people = db.getPeople()
-    // this.setState({
-    //   people: people
-    // })
     this.props.push(`/checkin/${personId}`)
   }
 
@@ -39,7 +33,6 @@ class Typeahead extends Component {
       this.props.push(`/checkin/${this.state.suggestions[0].id}`)
     }
     else this.props.push(`/register/${this.state.value}`)
-    console.log(this.props)
     event.preventDefault()
   }
 

@@ -21,7 +21,7 @@ const people = [
     id: 4,
     name: 'Chris Geirman',
     email: 'chris@fake.com',
-    checkedIn: true
+    checkedIn: false
   }
 ]
 
@@ -35,7 +35,15 @@ const db = {
   findPersonByName: function (name) {
     return people.find(person => person.name === name)
   },
-  checkIn: function (id) {
+  registerPerson: function (person) {
+    let nextId = people.sort((prev, next) => prev.id < next.id)[0].id + 1
+    people.push({
+      ...person,
+      id: nextId,
+      checkedIn: true
+    })
+  },
+  checkInPersonById: function (id) {
     people.find(person => person.id === id).checkedIn = true
   }
 }
