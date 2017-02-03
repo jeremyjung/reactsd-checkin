@@ -37,7 +37,7 @@ class Typeahead extends Component {
   }
 
   findMatches (name) {
-    if (name) {
+    if (name && name.length > 2) {
       return this.state.people.filter(person => {
         const regex = new RegExp(name, 'gi')
         return person.name.match(regex)
