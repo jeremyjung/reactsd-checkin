@@ -40,11 +40,13 @@ const db = {
   },
   registerPerson: function (person) {
     let nextId = people.sort((prev, next) => prev.id < next.id)[0].id + 1
-    people.push({
+    const newPerson = {
       ...person,
       id: nextId,
       checkedIn: true
-    })
+    }
+    people.push({ newPerson })
+    return newPerson
   },
   checkInPersonById: function (id) {
     people.find(person => person.id === id).checkedIn = true

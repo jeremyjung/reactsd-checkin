@@ -34,6 +34,12 @@ input {
 	text-align: center;
 }
 
+.register-complete-form {
+	max-width: 400px;
+	text-align: center;
+	font-size: 30px;
+}
+
 input.search {
 	margin: 0;
 	text-align: center;

@@ -8,6 +8,7 @@ import {
 import Typeahead from './components/typeahead'
 import CheckInPage from './components/checkInPage'
 import RegisterPage from './components/registerPage'
+import RegisterComplete from './components/registerComplete'
 import './style.css'
 
 const App = () =>
@@ -19,6 +20,7 @@ const App = () =>
         </div>
         <Switch>
           <Route path={'/checkin/:personId'} component={CheckInPage} />
+          <Route path={'/register/complete/:personName'} component={RegisterComplete} />
           <Route path={'/register/:personName'} component={RegisterPage} />
           <Route component={Typeahead} />
         </Switch>
