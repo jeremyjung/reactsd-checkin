@@ -20,7 +20,7 @@ class Typeahead extends Component {
 
   componentWillMount() {
     this.setState({
-      people: db.getPeople()
+      people: db.getPeopleNotCheckedIn()
     })
   }
 

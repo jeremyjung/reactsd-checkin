@@ -29,6 +29,9 @@ const db = {
   getPeople: function () {
     return people
   },
+  getPeopleNotCheckedIn: function () {
+    return people.filter(person => person.checkedIn === false)
+  },
   findPerson: function (id) {
     return people.find(person => person.id === Number(id))
   },
