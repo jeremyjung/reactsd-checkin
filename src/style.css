@@ -45,8 +45,7 @@ input.search {
 	text-align: center;
 	outline: 0;
 	border: 10px solid #F7F7F7;
-	width: 120%;
-	left: -10%;
+	width: 100%;
 	position: relative;
 	top: 10px;
 	z-index: 2;
@@ -94,8 +93,7 @@ button.new-user-button{
 	font-size: 25px;
 	font-weight: 100;
 	position: relative;
-	width: 120%;
-	left: -10%;
+	width: 100%;
 }
 
 span.checkout-item {
