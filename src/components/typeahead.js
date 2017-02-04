@@ -29,7 +29,7 @@ class Typeahead extends Component {
   }
 
   handleSubmit (event) {
-    if (this.state.suggestions.length == 0) {
+    if (this.state.suggestions.length === 0) {
       this.props.push(`/register/${this.state.value}`)
     }
     else if (this.state.suggestions.length > 0 && !this.state.suggestions[0].checkedIn) {
