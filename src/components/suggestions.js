@@ -13,20 +13,9 @@ const Suggestions = ({suggestions, handleCheckIn, handleCheckOut}) => {
     )
   }
 
-  const renderSuggestionsPlaceholder = () => {
-    return (
-      <li>Search for your name to check in</li>
-    )
-  }
-
-  const renderSuggestions = () => {
-    if (suggestions.length === 0) return renderSuggestionsPlaceholder()
-    return suggestions.map(suggestion => renderSuggestion(suggestion))
-  }
-
   return (
     <ul className='suggestions'>
-      { renderSuggestions() }
+      { suggestions.map(suggestion => renderSuggestion(suggestion)) }
     </ul>
   )
 }

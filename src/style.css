@@ -89,6 +89,15 @@ button.new-user-button{
 	font-weight: 100;
 }
 
+.register-button {
+	margin: 20px auto;
+	font-size: 25px;
+	font-weight: 100;
+	position: relative;
+	width: 120%;
+	left: -10%;
+}
+
 span.checkout-item {
 	color: red;
 }

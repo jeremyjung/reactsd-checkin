@@ -74,7 +74,7 @@ class RegisterForm extends Component {
           validate={val => this.isValidEmail(val) ? false : 'Invalid Email'}
         />
 
-        <button className='new-user-button' type='submit' disabled={this.validate()}>Register</button>
+        <button className='register-button' type='submit' disabled={this.validate()}>Register</button>
       </form>
     );
   }
