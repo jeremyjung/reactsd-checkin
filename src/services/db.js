@@ -45,7 +45,7 @@ const db = {
       id: nextId,
       checkedIn: true
     }
-    people.push({ newPerson })
+    people.push(newPerson)
     return newPerson
   },
   checkInPersonById: function (id) {
