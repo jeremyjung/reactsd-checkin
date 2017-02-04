@@ -8,7 +8,7 @@ const CheckInButton = ({checkedIn, handleCheckIn, handleCheckOut}) => {
 
   const renderCheckOut = () => (
     <button type='button' onClick={handleCheckOut} className='check-button'>
-      Check Out <span className='checkout-item'>(X)</span>
+      Check Out <span className='checkout-item'>x</span>
     </button>
   )
 
@@ -21,7 +21,8 @@ const CheckInButton = ({checkedIn, handleCheckIn, handleCheckOut}) => {
 
 CheckInButton.PropTypes = {
   checkedIn: React.PropTypes.object.isRequired,
-  handleCheckIn: React.PropTypes.func.isRequired
+  handleCheckIn: React.PropTypes.func.isRequired,
+  handleCheckOut: React.PropTypes.func.isRequired
 }
 
 export default CheckInButton
