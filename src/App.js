@@ -7,6 +7,7 @@ import {
 } from 'react-router-dom'
 import Typeahead from './components/typeahead'
 import CheckInPage from './components/checkInPage'
+import CheckOutPage from './components/checkOutPage'
 import RegisterPage from './components/registerPage'
 import RegisterComplete from './components/registerComplete'
 import './style.css'
@@ -20,6 +21,7 @@ const App = () =>
         </div>
         <Switch>
           <Route path={'/checkin/:personId'} component={CheckInPage} />
+          <Route path={'/checkout/:personId'} component={CheckOutPage} />
           <Route path={'/register/complete/:personName'} component={RegisterComplete} />
           <Route path={'/register/:personName'} component={RegisterPage} />
           <Route component={Typeahead} />

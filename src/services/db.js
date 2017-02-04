@@ -50,6 +50,9 @@ const db = {
   },
   checkInPersonById: function (id) {
     people.find(person => person.id === id).checkedIn = true
+  },
+  checkOutPersonById: function (id) {
+    people.find(person => person.id === id).checkedIn = false
   }
 }
 

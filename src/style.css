@@ -28,7 +28,7 @@ input {
 	margin: 50px auto;
 }
 
-.checkin-form {
+.check-form {
 	max-width: 400px;
 	margin: 50px auto;
 	text-align: center;
@@ -83,10 +83,14 @@ button.new-user-button{
 	position: relative;
 }
 
-.check-in {
+.check-button {
 	margin: 20px auto;
 	font-size: 25px;
 	font-weight: 100;
+}
+
+span.checkout-item {
+	color: red;
 }
 
 .checkin-header {

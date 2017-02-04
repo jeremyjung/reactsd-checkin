@@ -15,6 +15,7 @@ class Typeahead extends Component {
 
     this.onInputChange = this.onInputChange.bind(this)
     this.handleCheckIn = this.handleCheckIn.bind(this)
+    this.handleCheckOut = this.handleCheckOut.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
@@ -26,6 +27,10 @@ class Typeahead extends Component {
 
   handleCheckIn (personId) {
     this.props.push(`/checkin/${personId}`)
+  }
+
+  handleCheckOut (personId) {
+    this.props.push(`/checkout/${personId}`)
   }
 
   handleSubmit (event) {
@@ -61,7 +66,8 @@ class Typeahead extends Component {
       <form onSubmit={this.handleSubmit} className='search-form'>
         <input type='text' value={this.state.value} className='search' placeholder='Enter name...' onChange={this.onInputChange} />
         <Suggestions suggestions={this.state.suggestions}
-          handleCheckIn={this.handleCheckIn} />
+          handleCheckIn={this.handleCheckIn}
+          handleCheckOut={this.handleCheckOut} />
       </form>
     )
   }
