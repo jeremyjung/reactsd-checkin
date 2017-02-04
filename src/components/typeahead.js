@@ -20,7 +20,7 @@ class Typeahead extends Component {
 
   componentWillMount() {
     this.setState({
-      people: db.getPeopleNotCheckedIn()
+      people: db.getPeople()
     })
   }
 
@@ -29,10 +29,12 @@ class Typeahead extends Component {
   }
 
   handleSubmit (event) {
-    if (this.state.suggestions.length > 0) {
+    if (this.state.suggestions.length == 0) {
+      this.props.push(`/register/${this.state.value}`)
+    }
+    else if (this.state.suggestions.length > 0 && !this.state.suggestions[0].checkedIn) {
       this.props.push(`/checkin/${this.state.suggestions[0].id}`)
     }
-    else this.props.push(`/register/${this.state.value}`)
     event.preventDefault()
   }
 
