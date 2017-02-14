@@ -27,11 +27,17 @@ class Typeahead extends Component {
   }
 
   handleCheckIn (personId) {
-    this.props.push(`/checkin/${personId}`)
+    db.checkInPersonById(personId)
+    this.setState({
+      people: db.getPeople()
+    })
   }
 
   handleCheckOut (personId) {
-    this.props.push(`/checkout/${personId}`)
+    db.checkOutPersonById(personId)
+    this.setState({
+      people: db.getPeople()
+    })
   }
 
   handleRegistration (name) {
