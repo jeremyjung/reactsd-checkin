@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import Suggestions from './suggestions'
+import base from '../base'
 import db from '../services/db'
 
 class Typeahead extends Component {
@@ -21,9 +22,14 @@ class Typeahead extends Component {
   }
 
   componentWillMount() {
-    this.setState({
-      people: db.getPeople()
+    this.ref = base.syncState('people', {
+      context: this,
+      state: people
     })
+  }
+
+  componentWillUnmount() {
+    base.removeBinding(this.ref)
   }
 
   handleCheckIn (personId) {
