@@ -5,9 +5,9 @@ import {
   Switch,
   Link
 } from 'react-router-dom'
-import Typeahead from './components/typeahead'
-import RegisterPage from './components/registerPage'
-import RegisterComplete from './components/registerComplete'
+import Typeahead from './components/Typeahead'
+import RegisterPage from './components/RegisterPage'
+import RegisterComplete from './components/RegisterComplete'
 import './style.css'
 
 const App = () =>

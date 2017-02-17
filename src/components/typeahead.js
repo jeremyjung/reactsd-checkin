@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
-import Suggestions from './suggestions'
+import Suggestions from './Suggestions'
 import db from '../services/db'
 
 class Typeahead extends Component {

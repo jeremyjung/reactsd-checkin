@@ -1,5 +1,5 @@
 import React from 'react'
-import CheckInButton from './checkInButton'
+import CheckInButton from './CheckInButton'
 
 const Suggestion = ({ handleCheckIn, handleCheckOut, suggestion}) => {
 

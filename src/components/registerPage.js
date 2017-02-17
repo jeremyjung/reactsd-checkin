@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import RegisterForm from './registerForm'
+import RegisterForm from './RegisterForm'
 import { withRouter } from 'react-router-dom'
 import db from '../services/db'
 
