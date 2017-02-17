@@ -1,5 +1,5 @@
 import React from 'react'
-import Suggestion from './suggestion'
+import Suggestion from './Suggestion'
 
 const Suggestions = ({suggestions, handleCheckIn, handleCheckOut}) => {
 

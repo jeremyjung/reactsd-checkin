@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Field from './field'
+import Field from './Field'
 
 class RegisterForm extends Component {
   constructor (props) {

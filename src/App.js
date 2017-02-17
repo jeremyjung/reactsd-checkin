@@ -5,11 +5,9 @@ import {
   Switch,
   Link
 } from 'react-router-dom'
-import Typeahead from './components/typeahead'
-import CheckInPage from './components/checkInPage'
-import CheckOutPage from './components/checkOutPage'
-import RegisterPage from './components/registerPage'
-import RegisterComplete from './components/registerComplete'
+import Typeahead from './components/Typeahead'
+import RegisterPage from './components/RegisterPage'
+import RegisterComplete from './components/RegisterComplete'
 import './style.css'
 
 const App = () =>
@@ -20,8 +18,6 @@ const App = () =>
           <h1><Link className='checkin-header' to='/'>React SD Check-in</Link></h1>
         </div>
         <Switch>
-          <Route path={'/checkin/:personId'} component={CheckInPage} />
-          <Route path={'/checkout/:personId'} component={CheckOutPage} />
           <Route path={'/register/complete/:personName'} component={RegisterComplete} />
           <Route path={'/register/:personName'} component={RegisterPage} />
           <Route component={Typeahead} />
