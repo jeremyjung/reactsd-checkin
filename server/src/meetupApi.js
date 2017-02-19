@@ -7,10 +7,10 @@ const querystring = require('querystring')
 const apiKey = process.env.MEETUP_API_KEY
 const baseUrl = 'https://api.meetup.com'
 const meetupGroup = 'ReactSD'
-const allMemberDataUrl = path.join(__dirname, '../../output/allMemberData.json')
-const allEventDataUrl = path.join(__dirname, '../../output/allEventData.json')
-const rsvpsForEventUrl = path.join(__dirname, '../../output/rsvpsForEvent.json')
-const membersForDbUrl = path.join(__dirname, '../../output/membersForDb.json')
+const allMemberDataPath = path.join(__dirname, '../../output/allMemberData.json')
+const allEventDataPath = path.join(__dirname, '../../output/allEventData.json')
+const rsvpsForEventPath = path.join(__dirname, '../../output/rsvpsForEvent.json')
+const pathForFirebaseImport = path.join(__dirname, '../../output/firebaseDb.json')
 
 function appendParametersToUrl(queryUrl, params = {}) {
   let queryString = url.format({ query: params })
@@ -54,11 +54,14 @@ function writeToFile(json, filePath) {
 
 function prepareDataForDb() {
   console.log(__dirname)
-  const members = require(allMemberDataUrl)
+  const members = require(allMemberDataPath)
+  const events = require(allEventDataPath)
   console.log('Loaded all members to prep for Db')
   const truncatedMembers = []
+  const truncatedEvents = []
   const db = {
-    members: truncatedMembers
+    members: truncatedMembers,
+    events: truncatedEvents
   }
   members.forEach(member => {
     truncatedMembers.push({
@@ -67,8 +70,16 @@ function prepareDataForDb() {
       source: 'meetup'
     })
   })
+  events.forEach(event => {
+    if (event.announced) {
+      truncatedEvents.push({
+        name: event.name,
+        meetup_id: event.id
+      })
+    }
+  })
 
-  writeToFile(db, membersForDbUrl)
+  writeToFile(db, pathForFirebaseImport )
 }
 
 function getJson(url) {
@@ -94,7 +105,7 @@ function getAllMembers() {
   return getMeetupDataInPages(getMembersUrl())
             .then(result => {
               console.log('Got all members')
-              writeToFile(result, allMemberDataUrl)
+              writeToFile(result, allMemberDataPath)
             })
 }
 
@@ -102,7 +113,7 @@ function getAllEvents() {
   return getMeetupDataInPages(getEventsUrl())
            .then(result => {
               console.log('Got all events')
-              writeToFile(result, allEventDataUrl)
+              writeToFile(result, allEventDataPath)
            })
 }
 
@@ -110,7 +121,7 @@ function getRSVPsForEvent(eventId) {
   return getMeetupDataInPages(getRSVPsUrl(eventId))
            .then(result => {
               console.log('Got all RSVPs')
-              writeToFile(result, rsvpsForEventUrl)
+              writeToFile(result, rsvpsForEventPath)
            })
 }
 
