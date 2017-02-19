@@ -4,6 +4,7 @@
   "private": true,
   "devDependencies": {
     "gh-pages": "^0.12.0",
+    "node-fetch": "^1.6.3",
     "react-scripts": "0.8.5"
   },
   "dependencies": {
@@ -18,7 +19,10 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "deploy": "npm run build && gh-pages -d build"
+    "deploy": "npm run build && gh-pages -d build",
+    "get-users": "node server/src/scripts/getMembersFromMeetup.js",
+    "get-events": "node server/src/scripts/getEventsFromMeetup.js",
+    "build-db": "node server/src/scripts/prepareDbForFirebase.js"
   },
   "homepage": "http://jeremyjung.github.io/reactsd-checkin"
 }
