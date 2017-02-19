@@ -45,7 +45,6 @@ function getRSVPsUrl(eventId) {
 }
 
 function writeToFile(json, filePath) {
-  console.log(filePath)
   fs.writeFile(filePath, JSON.stringify(json), (err) => {
     if (err) throw err
     console.log('Finished writing to file')
@@ -53,12 +52,12 @@ function writeToFile(json, filePath) {
 }
 
 function prepareDataForDb() {
-  console.log(__dirname)
   const members = require(allMemberDataPath)
   const events = require(allEventDataPath)
   console.log('Loaded all members to prep for Db')
   const truncatedMembers = []
   const truncatedEvents = []
+
   const db = {
     members: truncatedMembers,
     events: truncatedEvents
@@ -74,7 +73,8 @@ function prepareDataForDb() {
     if (event.announced) {
       truncatedEvents.push({
         name: event.name,
-        meetup_id: event.id
+        meetup_id: event.id,
+        time: event.time
       })
     }
   })
