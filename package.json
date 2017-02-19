@@ -22,6 +22,7 @@
     "deploy": "npm run build && gh-pages -d build",
     "get-users": "node server/src/scripts/getMembersFromMeetup.js",
     "get-events": "node server/src/scripts/getEventsFromMeetup.js",
+    "get-rsvps": "node server/src/scripts/getRSVPsForEvent.js",
     "build-db": "node server/src/scripts/prepareDbForFirebase.js"
   },
   "homepage": "http://jeremyjung.github.io/reactsd-checkin"

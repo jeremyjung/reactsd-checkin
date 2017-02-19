@@ -9,6 +9,7 @@ const baseUrl = 'https://api.meetup.com'
 const meetupGroup = 'ReactSD'
 const allMemberDataUrl = path.join(__dirname, '../../output/allMemberData.json')
 const allEventDataUrl = path.join(__dirname, '../../output/allEventData.json')
+const rsvpsForEventUrl = path.join(__dirname, '../../output/rsvpsForEvent.json')
 const membersForDbUrl = path.join(__dirname, '../../output/membersForDb.json')
 
 function appendParametersToUrl(queryUrl, params = {}) {
@@ -29,6 +30,15 @@ function getEventsUrl() {
   const queryUrl = `${baseUrl}/2/events`
   const params = {
     group_urlname: meetupGroup,
+    key: apiKey
+  }
+  return appendParametersToUrl(queryUrl, params)
+}
+
+function getRSVPsUrl(eventId) {
+  const queryUrl = `${baseUrl}/2/rsvps`
+  const params = {
+    event_id: eventId,
     key: apiKey
   }
   return appendParametersToUrl(queryUrl, params)
@@ -96,8 +106,17 @@ function getAllEvents() {
            })
 }
 
+function getRSVPsForEvent(eventId) {
+  return getMeetupDataInPages(getRSVPsUrl(eventId))
+           .then(result => {
+              console.log('Got all RSVPs')
+              writeToFile(result, rsvpsForEventUrl)
+           })
+}
+
 module.exports = {
   getAllMembers,
   getAllEvents,
+  getRSVPsForEvent,
   prepareDataForDb
 }
