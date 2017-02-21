@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
-import Suggestions from './suggestions'
+import Suggestions from './Suggestions'
 import base from '../base'
-import db from '../services/db'
 
 class Typeahead extends Component {
 
@@ -22,9 +21,11 @@ class Typeahead extends Component {
   }
 
   componentWillMount() {
-    this.ref = base.syncState('people', {
+    this.ref = base.syncState('members', {
       context: this,
-      state: people
+      state: 'people',
+      asArray: true,
+      keepKeys: true
     })
   }
 
@@ -32,18 +33,16 @@ class Typeahead extends Component {
     base.removeBinding(this.ref)
   }
 
-  handleCheckIn (personId) {
-    db.checkInPersonById(personId)
-    this.setState({
-      people: db.getPeople()
-    })
+  handleCheckIn (personKey) {
+    const newPeopleState = { ...this.state.people }
+    newPeopleState[personKey].checkedIn = true
+    this.setState({ newPeopleState })
   }
 
-  handleCheckOut (personId) {
-    db.checkOutPersonById(personId)
-    this.setState({
-      people: db.getPeople()
-    })
+  handleCheckOut (personKey) {
+    const newPeopleState = { ...this.state.people }
+    newPeopleState[personKey].checkedIn = false
+    this.setState({ newPeopleState })
   }
 
   handleRegistration (name) {
@@ -55,10 +54,10 @@ class Typeahead extends Component {
       this.handleRegistration(this.state.value)
     }
     else if (this.state.suggestions.length > 0 && !this.state.suggestions[0].checkedIn) {
-      this.handleCheckIn(this.state.suggestions[0].id)
+      this.handleCheckIn(this.state.suggestions[0].key)
     }
     else {
-      this.handleCheckOut(this.state.suggestions[0].id)
+      this.handleCheckOut(this.state.suggestions[0].key)
     }
     event.preventDefault()
   }

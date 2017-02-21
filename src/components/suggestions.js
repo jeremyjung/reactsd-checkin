@@ -6,7 +6,7 @@ const Suggestions = ({suggestions, handleCheckIn, handleCheckOut}) => {
   const renderSuggestion = (suggestion) => {
     return (
       <Suggestion
-        key={suggestion.id}
+        key={suggestion.key}
         suggestion={suggestion}
         handleCheckIn={handleCheckIn}
         handleCheckOut={handleCheckOut} />

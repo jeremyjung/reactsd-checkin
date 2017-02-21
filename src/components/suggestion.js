@@ -3,8 +3,8 @@ import CheckInButton from './CheckInButton'
 
 const Suggestion = ({ handleCheckIn, handleCheckOut, suggestion}) => {
 
-  const handleCheckInClick = () => handleCheckIn(suggestion.id)
-  const handleCheckOutClick = () => handleCheckOut(suggestion.id)
+  const handleCheckInClick = () => handleCheckIn(suggestion.key)
+  const handleCheckOutClick = () => handleCheckOut(suggestion.key)
 
   return (
     <li>

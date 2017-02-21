@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import RegisterForm from './RegisterForm'
 import { withRouter } from 'react-router-dom'
-import db from '../services/db'
+import base from '../base'
 
 class RegisterPage extends Component {
 
@@ -12,7 +12,13 @@ class RegisterPage extends Component {
   }
 
   registerPerson (person) {
-    db.registerPerson(person)
+    base.push('members', {
+      data: {
+        name: person.name,
+        email: person.email,
+        checkedIn: true
+      }
+    })
     this.props.push(`/register/complete/${person.name}`)
   }
 

@@ -51,33 +51,39 @@ function writeToFile(json, filePath) {
   })
 }
 
+function didMemberRsvp(rsvps, member_id) {
+  member_rsvp = rsvps.find(rsvp => rsvp.member.member_id == member_id)
+  if (member_rsvp && member_rsvp.response === 'yes') return true
+  return false
+}
+
 function prepareDataForDb() {
   const members = require(allMemberDataPath)
   const events = require(allEventDataPath)
+  const rsvps = require(rsvpsForEventPath)
   console.log('Loaded all members to prep for Db')
   const truncatedMembers = []
-  const truncatedEvents = []
 
   const db = {
     members: truncatedMembers,
-    events: truncatedEvents
   }
   members.forEach(member => {
     truncatedMembers.push({
-      name: member.name,
       meetup_id: member.id,
-      source: 'meetup'
+      name: member.name,
+      rsvp: didMemberRsvp(rsvps, member.id),
+      checkedIn: false
     })
   })
-  events.forEach(event => {
-    if (event.announced) {
-      truncatedEvents.push({
-        name: event.name,
-        meetup_id: event.id,
-        time: event.time
-      })
-    }
-  })
+  // events.forEach(event => {
+  //   if (event.announced) {
+  //     truncatedEvents.push({
+  //       name: event.name,
+  //       meetup_id: event.id,
+  //       time: event.time
+  //     })
+  //   }
+  // })
 
   writeToFile(db, pathForFirebaseImport )
 }
