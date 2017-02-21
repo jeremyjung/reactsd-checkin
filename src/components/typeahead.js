@@ -10,22 +10,26 @@ class Typeahead extends Component {
     this.state = {
       value: '',
       suggestions: [],
-      people: []
+      people: {}
     }
 
     this.onInputChange = this.onInputChange.bind(this)
     this.handleCheckIn = this.handleCheckIn.bind(this)
     this.handleCheckOut = this.handleCheckOut.bind(this)
     this.handleRegistration = this.handleRegistration.bind(this)
+    this.updateSuggestions = this.updateSuggestions.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   componentWillMount() {
+    // base.fetch('members', {
+    //   context: this
+    // }).then(data => {
+    //   this.setState({ people: data })
+    // })
     this.ref = base.syncState('members', {
       context: this,
-      state: 'people',
-      asArray: true,
-      keepKeys: true
+      state: 'people'
     })
   }
 
@@ -35,14 +39,22 @@ class Typeahead extends Component {
 
   handleCheckIn (personKey) {
     const newPeopleState = { ...this.state.people }
-    newPeopleState[personKey].checkedIn = true
-    this.setState({ newPeopleState })
+    newPeopleState[personKey] = { ...newPeopleState[personKey], checkedIn: true }
+    this.setState({ people: newPeopleState })
+    const newSuggestions = [ ...this.state.suggestions ]
+    const suggestionIndex = newSuggestions.findIndex(suggestion => suggestion.key === personKey)
+    newSuggestions[suggestionIndex].checkedIn = true
+    this.setState({ suggestions: newSuggestions })
   }
 
   handleCheckOut (personKey) {
     const newPeopleState = { ...this.state.people }
-    newPeopleState[personKey].checkedIn = false
-    this.setState({ newPeopleState })
+    newPeopleState[personKey] = { ...newPeopleState[personKey], checkedIn: false }
+    this.setState({ people: newPeopleState })
+    const newSuggestions = [ ...this.state.suggestions ]
+    const suggestionIndex = newSuggestions.findIndex(suggestion => suggestion.key === personKey)
+    newSuggestions[suggestionIndex].checkedIn = false
+    this.setState({ suggestions: newSuggestions })
   }
 
   handleRegistration (name) {
@@ -62,22 +74,35 @@ class Typeahead extends Component {
     event.preventDefault()
   }
 
+  convertFirebaseObjectToArray () {
+    return Object.keys(this.state.people).map(key => {
+      return {
+        ...this.state.people[key],
+        key: key
+      }
+    })
+  }
+
   findMatches (name) {
     if (name && name.length > 2) {
-      return this.state.people.filter(person => {
+      const peopleAsArray = this.convertFirebaseObjectToArray()
+      return peopleAsArray.filter(person => {
         const regex = new RegExp(name, 'gi')
         return person.name.match(regex)
       })
     } else return []
   }
 
-  onInputChange (event) {
-    const value = event.target.value
+  updateSuggestions (value) {
     const suggestions = this.findMatches(value)
     this.setState({
       value: value,
       suggestions: suggestions
     })
+  }
+
+  onInputChange (event) {
+    this.updateSuggestions(event.target.value)
   }
 
   render () {
