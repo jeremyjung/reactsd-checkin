@@ -1,24 +1,21 @@
 import React from 'react'
-import CheckInButton from './checkInButton'
+import CheckInButton from './CheckInButton'
 
-const Suggestion = ({ handleCheckIn, handleCheckOut, suggestion}) => {
+const Suggestion = ({ toggleCheckIn, suggestion}) => {
 
-  const handleCheckInClick = () => handleCheckIn(suggestion.id)
-  const handleCheckOutClick = () => handleCheckOut(suggestion.id)
+  const toggleCheckInClick = () => toggleCheckIn(suggestion.key)
 
   return (
     <li>
       <span className='name'>{suggestion.name}</span>
       <CheckInButton checkedIn={suggestion.checkedIn}
-        handleCheckIn={handleCheckInClick}
-        handleCheckOut={handleCheckOutClick} />
+        toggleCheckIn={toggleCheckInClick} />
     </li>
   )
 }
 
 Suggestion.PropTypes = {
-  handleCheckIn: React.PropTypes.func.isRequired,
-  handleCheckOut: React.PropTypes.func.isRequired,
+  toggleCheckIn: React.PropTypes.func.isRequired,
   suggestion: React.PropTypes.func.isRequired
 }
 

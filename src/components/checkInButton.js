@@ -1,13 +1,13 @@
 import React from 'react'
 
-const CheckInButton = ({checkedIn, handleCheckIn, handleCheckOut}) => {
+const CheckInButton = ({checkedIn, toggleCheckIn}) => {
 
   const renderCheckIn = () => (
-    <button type='button' onClick={handleCheckIn} className='check-button'>Check In</button>
+    <button type='button' onClick={toggleCheckIn} className='check-button'>Check In</button>
   )
 
   const renderCheckOut = () => (
-    <button type='button' onClick={handleCheckOut} className='check-button'>
+    <button type='button' onClick={toggleCheckIn} className='check-button'>
       Check Out <span className='checkout-item'>x</span>
     </button>
   )
@@ -21,8 +21,7 @@ const CheckInButton = ({checkedIn, handleCheckIn, handleCheckOut}) => {
 
 CheckInButton.PropTypes = {
   checkedIn: React.PropTypes.object.isRequired,
-  handleCheckIn: React.PropTypes.func.isRequired,
-  handleCheckOut: React.PropTypes.func.isRequired
+  toggleCheckIn: React.PropTypes.func.isRequired
 }
 
 export default CheckInButton

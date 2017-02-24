@@ -1,0 +1,28 @@
+{
+  people: [
+  {
+    id: 1,
+    name: 'Jordan Walke',
+    email: 'jordan@fake.com',
+    checkedIn: false
+  },
+  {
+    id: 2,
+    name: 'Michael Jackson',
+    email: 'michael@fake.com',
+    checkedIn: false
+  },
+  {
+    id: 3,
+    name: 'Harry Wolff',
+    email: 'harry@fake.com',
+    checkedIn: false
+  },
+  {
+    id: 4,
+    name: 'Chris Geirman',
+    email: 'chris@fake.com',
+    checkedIn: false
+  }
+  ]
+}
