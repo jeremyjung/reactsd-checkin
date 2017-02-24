@@ -1,15 +1,14 @@
 import React from 'react'
 import Suggestion from './Suggestion'
 
-const Suggestions = ({suggestions, handleCheckIn, handleCheckOut}) => {
+const Suggestions = ({suggestions, toggleCheckIn}) => {
 
   const renderSuggestion = (suggestion) => {
     return (
       <Suggestion
         key={suggestion.key}
         suggestion={suggestion}
-        handleCheckIn={handleCheckIn}
-        handleCheckOut={handleCheckOut} />
+        toggleCheckIn={toggleCheckIn} />
     )
   }
 
@@ -22,8 +21,7 @@ const Suggestions = ({suggestions, handleCheckIn, handleCheckOut}) => {
 
 Suggestions.PropTypes = {
   suggestions: React.PropTypes.array.isRequired,
-  handleCheckIn: React.PropTypes.func.isRequired,
-  handleCheckOut: React.PropTypes.func.isRequired
+  toggleCheckIn: React.PropTypes.func.isRequired,
 }
 
 export default Suggestions

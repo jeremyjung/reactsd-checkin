@@ -14,47 +14,35 @@ class Typeahead extends Component {
     }
 
     this.onInputChange = this.onInputChange.bind(this)
-    this.handleCheckIn = this.handleCheckIn.bind(this)
-    this.handleCheckOut = this.handleCheckOut.bind(this)
+    this.toggleCheckIn = this.toggleCheckIn.bind(this)
     this.handleRegistration = this.handleRegistration.bind(this)
     this.updateSuggestions = this.updateSuggestions.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   componentWillMount() {
-    // base.fetch('members', {
-    //   context: this
-    // }).then(data => {
-    //   this.setState({ people: data })
-    // })
-    this.ref = base.syncState('members', {
-      context: this,
-      state: 'people'
+    base.fetch('members', {
+      context: this
+    }).then(data => {
+      this.setState({ people: data })
     })
+
   }
 
   componentWillUnmount() {
-    base.removeBinding(this.ref)
   }
 
-  handleCheckIn (personKey) {
+  toggleCheckIn (personKey) {
     const newPeopleState = { ...this.state.people }
-    newPeopleState[personKey] = { ...newPeopleState[personKey], checkedIn: true }
-    this.setState({ people: newPeopleState })
-    const newSuggestions = [ ...this.state.suggestions ]
-    const suggestionIndex = newSuggestions.findIndex(suggestion => suggestion.key === personKey)
-    newSuggestions[suggestionIndex].checkedIn = true
-    this.setState({ suggestions: newSuggestions })
-  }
-
-  handleCheckOut (personKey) {
-    const newPeopleState = { ...this.state.people }
-    newPeopleState[personKey] = { ...newPeopleState[personKey], checkedIn: false }
-    this.setState({ people: newPeopleState })
-    const newSuggestions = [ ...this.state.suggestions ]
-    const suggestionIndex = newSuggestions.findIndex(suggestion => suggestion.key === personKey)
-    newSuggestions[suggestionIndex].checkedIn = false
-    this.setState({ suggestions: newSuggestions })
+    const person = { ...newPeopleState[personKey] }
+    const newCheckedInState = person.checkedIn = !person.checkedIn
+    newPeopleState[personKey] = { ...person, checkedIn: newCheckedInState}
+    this.setState({ people: newPeopleState }, () => {
+      this.updateSuggestions()
+      base.update(`members/${personKey}`, {
+          data: { ...newPeopleState[personKey] }
+      })
+    })
   }
 
   handleRegistration (name) {
@@ -65,12 +53,8 @@ class Typeahead extends Component {
     if (this.state.suggestions.length === 0) {
       this.handleRegistration(this.state.value)
     }
-    else if (this.state.suggestions.length > 0 && !this.state.suggestions[0].checkedIn) {
-      this.handleCheckIn(this.state.suggestions[0].key)
-    }
-    else {
-      this.handleCheckOut(this.state.suggestions[0].key)
-    }
+    else this.toggleCheckIn(this.state.suggestions[0].key)
+
     event.preventDefault()
   }
 
@@ -93,16 +77,17 @@ class Typeahead extends Component {
     } else return []
   }
 
-  updateSuggestions (value) {
-    const suggestions = this.findMatches(value)
+  updateSuggestions () {
+    const suggestions = this.findMatches(this.state.value)
     this.setState({
-      value: value,
       suggestions: suggestions
     })
   }
 
   onInputChange (event) {
-    this.updateSuggestions(event.target.value)
+    this.setState({
+      value: event.target.value
+    }, () => this.updateSuggestions())
   }
 
   render () {
@@ -111,8 +96,8 @@ class Typeahead extends Component {
         <input type='text' value={this.state.value} className='search' placeholder='Enter name...' onChange={this.onInputChange} />
         { this.state.suggestions.length === 0 && <button className='register-button'>Register</button> }
         <Suggestions suggestions={this.state.suggestions}
-          handleCheckIn={this.handleCheckIn}
-          handleCheckOut={this.handleCheckOut} />
+          toggleCheckIn={this.toggleCheckIn}
+        />
       </form>
     )
   }
