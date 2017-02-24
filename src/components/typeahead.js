@@ -24,7 +24,7 @@ class Typeahead extends Component {
     base.fetch('members', {
       context: this
     }).then(data => {
-      this.setState({ people: data })
+      if (data != null) this.setState({ people: data })
     })
 
   }
