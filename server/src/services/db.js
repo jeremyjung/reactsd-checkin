@@ -9,8 +9,28 @@ function firebaseQuery(dbPath) {
   })
 }
 
+function firebasePush(dbPath, data) {
+  return db.ref(dbPath).push(data)
+}
+
+function firebaseSet(dbPath, data) {
+  return db.ref(dbPath).set(data)
+}
+
+function firebaseUpdate(dbPath, data) {
+  db.ref(dbPath).update(data)
+}
+
 exports.getAllMembers = function() {
   return firebaseQuery('members')
+}
+
+exports.getAllProtectedMemberData = function() {
+  return firebaseQuery('protectedMembers')
+}
+
+exports.getAllMeetupMembers = function() {
+  return firebaseQuery('meetupMembers')
 }
 
 exports.getAllEvents = function() {
@@ -27,4 +47,17 @@ exports.getRSVPsForEvent = function(eventId) {
 
 exports.getAllEmails = function() {
   return firebaseQuery('emails')
+}
+
+exports.importMeetupMembers = function (meetupMembers) {
+  firebaseSet('/members', {})
+  firebaseSet('/protectedMembers', {})
+
+  meetupMembers.map(member => {
+    result = firebasePush('/members', {
+      name: member.name,
+      meetupId: member.id,
+      meetupJoined: member.joined
+    })
+  })
 }

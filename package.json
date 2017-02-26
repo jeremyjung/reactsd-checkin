@@ -21,11 +21,7 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "deploy": "npm run build && gh-pages -d build",
-    "get-users": "node server/src/scripts/getMembersFromMeetup.js",
-    "get-events": "node server/src/scripts/getEventsFromMeetup.js",
-    "get-rsvps": "node server/src/scripts/getRSVPsForEvent.js",
-    "build-db": "node server/src/scripts/prepareDbForFirebase.js",
-    "get-members": "node server/src/scripts/getMembersFromFirebase.js"
+    "meetup-sync": "node server/src/meetupSync.js"
   },
   "homepage": "http://jeremyjung.github.io/reactsd-checkin"
 }

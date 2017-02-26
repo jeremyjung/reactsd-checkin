@@ -7,10 +7,6 @@ const querystring = require('querystring')
 const apiKey = process.env.MEETUP_API_KEY
 const baseUrl = 'https://api.meetup.com'
 const meetupGroup = 'ReactSD'
-const allMemberDataPath = path.join(__dirname, '../../output/allMemberData.json')
-const allEventDataPath = path.join(__dirname, '../../output/allEventData.json')
-const rsvpsForEventPath = path.join(__dirname, '../../output/rsvpsForEvent.json')
-const pathForFirebaseImport = path.join(__dirname, '../../output/firebaseDb.json')
 
 function appendParametersToUrl(queryUrl, params = {}) {
   let queryString = url.format({ query: params })
@@ -57,38 +53,7 @@ function didMemberRsvp(rsvps, member_id) {
   return false
 }
 
-function prepareDataForDb() {
-  const members = require(allMemberDataPath)
-  const events = require(allEventDataPath)
-  const rsvps = require(rsvpsForEventPath)
-  console.log('Loaded all members to prep for Db')
-  const truncatedMembers = []
-
-  const db = {
-    members: truncatedMembers,
-  }
-  members.forEach(member => {
-    truncatedMembers.push({
-      meetup_id: member.id,
-      name: member.name,
-      rsvp: didMemberRsvp(rsvps, member.id),
-      checkedIn: false
-    })
-  })
-  // events.forEach(event => {
-  //   if (event.announced) {
-  //     truncatedEvents.push({
-  //       name: event.name,
-  //       meetup_id: event.id,
-  //       time: event.time
-  //     })
-  //   }
-  // })
-
-  writeToFile(db, pathForFirebaseImport )
-}
-
-function getJson(url) {
+function getJsonFromUrl(url) {
   return fetch(url)
     .then(res => res.json())
     .then(json => json)
@@ -96,7 +61,7 @@ function getJson(url) {
 
 function getMeetupDataInPages(url, results = []) {
 
-  return getJson(url)
+  return getJsonFromUrl(url)
             .then(json => {
               results = results.concat(json.results)
               console.log(`Got ${results.length} records`)
@@ -107,33 +72,14 @@ function getMeetupDataInPages(url, results = []) {
             })
 }
 
-function getAllMembers() {
+exports.getAllMembers = function() {
   return getMeetupDataInPages(getMembersUrl())
-            .then(result => {
-              console.log('Got all members')
-              writeToFile(result, allMemberDataPath)
-            })
 }
 
-function getAllEvents() {
+exports.getAllEvents = function() {
   return getMeetupDataInPages(getEventsUrl())
-           .then(result => {
-              console.log('Got all events')
-              writeToFile(result, allEventDataPath)
-           })
 }
 
-function getRSVPsForEvent(eventId) {
+exports.getRSVPsForEvent = function(eventId) {
   return getMeetupDataInPages(getRSVPsUrl(eventId))
-           .then(result => {
-              console.log('Got all RSVPs')
-              writeToFile(result, rsvpsForEventPath)
-           })
-}
-
-module.exports = {
-  getAllMembers,
-  getAllEvents,
-  getRSVPsForEvent,
-  prepareDataForDb
 }
