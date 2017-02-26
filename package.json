@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
+    "firebase-admin": "^4.1.1",
     "gh-pages": "^0.12.0",
     "node-fetch": "^1.6.3",
     "react-scripts": "0.8.5"
@@ -23,7 +24,8 @@
     "get-users": "node server/src/scripts/getMembersFromMeetup.js",
     "get-events": "node server/src/scripts/getEventsFromMeetup.js",
     "get-rsvps": "node server/src/scripts/getRSVPsForEvent.js",
-    "build-db": "node server/src/scripts/prepareDbForFirebase.js"
+    "build-db": "node server/src/scripts/prepareDbForFirebase.js",
+    "get-members": "node server/src/scripts/getMembersFromFirebase.js"
   },
   "homepage": "http://jeremyjung.github.io/reactsd-checkin"
 }
