@@ -1,7 +1,7 @@
 import React from 'react'
 import CheckInButton from './CheckInButton'
 
-const Suggestion = ({ toggleCheckIn, suggestion}) => {
+const Suggestion = ({ toggleCheckIn, suggestion }) => {
 
   const toggleCheckInClick = () => toggleCheckIn(suggestion.key)
 
