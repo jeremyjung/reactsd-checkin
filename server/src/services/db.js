@@ -1,4 +1,5 @@
 const firebase = require('../firebase').firebase
+const meetup = require('./meetup')
 
 const db = firebase.database()
 
@@ -29,10 +30,6 @@ exports.getAllProtectedMemberData = function() {
   return firebaseQuery('protectedMembers')
 }
 
-exports.getAllMeetupMembers = function() {
-  return firebaseQuery('meetupMembers')
-}
-
 exports.getAllEvents = function() {
   return firebaseQuery('events')
 }
@@ -53,11 +50,22 @@ exports.importMeetupMembers = function (meetupMembers) {
   firebaseSet('/members', {})
   firebaseSet('/protectedMembers', {})
 
-  meetupMembers.map(member => {
-    result = firebasePush('/members', {
-      name: member.name,
-      meetupId: member.id,
-      meetupJoined: member.joined
+  return meetup.getRSVPsForCurrentEvent()
+    .then(memberIdsWithRSVP => {
+      return meetupMembers.map(member => {
+        const memberToPush = {
+          name: member.name,
+          rsvp: memberIdsWithRSVP[member.id] === true
+        }
+        result = firebasePush('/members', memberToPush)
+        memberToPush.key = result.key
+
+        firebaseSet(`/protectedMembers/${result.key}`, {
+          meetupId: member.id,
+          meetupJoined: member.joined
+        })
+
+        return memberToPush
     })
   })
 }

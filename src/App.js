@@ -5,9 +5,9 @@ import {
   Switch,
   Link
 } from 'react-router-dom'
-import Typeahead from './components/Typeahead'
-import RegisterPage from './components/RegisterPage'
-import RegisterComplete from './components/RegisterComplete'
+import Typeahead from './components/pages/Typeahead'
+import Register from './components/pages/Register'
+import RegisterComplete from './components/pages/RegisterComplete'
 import './style.css'
 
 const App = () =>
@@ -19,7 +19,7 @@ const App = () =>
         </div>
         <Switch>
           <Route path={'/register/complete/:personName'} component={RegisterComplete} />
-          <Route path={'/register/:personName'} component={RegisterPage} />
+          <Route path={'/register/:personName'} component={Register} />
           <Route component={Typeahead} />
         </Switch>
       </div>

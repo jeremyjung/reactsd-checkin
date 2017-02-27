@@ -40,13 +40,6 @@ function getRSVPsUrl(eventId) {
   return appendParametersToUrl(queryUrl, params)
 }
 
-function writeToFile(json, filePath) {
-  fs.writeFile(filePath, JSON.stringify(json), (err) => {
-    if (err) throw err
-    console.log('Finished writing to file')
-  })
-}
-
 function didMemberRsvp(rsvps, member_id) {
   member_rsvp = rsvps.find(rsvp => rsvp.member.member_id == member_id)
   if (member_rsvp && member_rsvp.response === 'yes') return true
@@ -72,14 +65,21 @@ function getMeetupDataInPages(url, results = []) {
             })
 }
 
+function getAllEvents() {
+  return getMeetupDataInPages(getEventsUrl())
+}
+
+function getRSVPsForEvent(eventId) {
+  return getMeetupDataInPages(getRSVPsUrl(eventId))
+}
+
 exports.getAllMembers = function() {
   return getMeetupDataInPages(getMembersUrl())
 }
 
-exports.getAllEvents = function() {
-  return getMeetupDataInPages(getEventsUrl())
-}
-
-exports.getRSVPsForEvent = function(eventId) {
-  return getMeetupDataInPages(getRSVPsUrl(eventId))
+exports.getRSVPsForCurrentEvent = function() {
+  return getAllEvents()
+           .then(events => getRSVPsForEvent(events[0].id))
+           .then(rsvps => rsvps.filter((rsvp) => rsvp.response === 'yes'))
+           .then(rsvpsPositive => rsvpsPositive.map((rsvpPositive) => rsvpPositive.member.member_id))
 }

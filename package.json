@@ -21,7 +21,7 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "deploy": "npm run build && gh-pages -d build",
-    "meetup-sync": "node server/src/meetupSync.js"
+    "import": "node server/src/import.js"
   },
   "homepage": "http://jeremyjung.github.io/reactsd-checkin"
 }
