@@ -30,22 +30,6 @@ exports.getAllProtectedMemberData = function() {
   return firebaseQuery('protectedMembers')
 }
 
-exports.getAllEvents = function() {
-  return firebaseQuery('events')
-}
-
-exports.getAllRSVPs = function() {
-  return firebaseQuery('rsvps')
-}
-
-exports.getRSVPsForEvent = function(eventId) {
-  return firebaseQuery(`rsvps/${eventId}`)
-}
-
-exports.getAllEmails = function() {
-  return firebaseQuery('emails')
-}
-
 exports.importMeetupMembers = function (meetupMembers) {
   firebaseSet('/members', {})
   firebaseSet('/protectedMembers', {})
