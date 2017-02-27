@@ -2,6 +2,10 @@
 
 This is just a placeholder for an application that can be used to check-in attendees to React SD meetups.
 
+### Demo
+
+If you just want to see it running go [here](https://jeremyjung.github.io/reactsd-checkin/ "ReactSD").
+
 ### Installation
 
 1.  `yarn install`
