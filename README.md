@@ -14,5 +14,6 @@ This is just a placeholder for an application that can be used to check-in atten
 ### Importing members from meetup
 Note that after running this, the node process will never quit so you'll have to hit ctrl-c after import is complete.  See:  http://stackoverflow.com/questions/27641764/how-to-destroy-firebase-ref-in-node
 
+*  Set firebase admin API key path in environment variable `export FIREBASE_ADMIN_API_PATH=<FILL_IN_PATH_TO_ADMIN_KEY_HERE>`
 *  `yarn run import`
 
