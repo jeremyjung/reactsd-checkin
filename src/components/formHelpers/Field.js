@@ -1,4 +1,5 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 
 class Field extends Component {
   constructor(props) {
@@ -42,12 +43,12 @@ class Field extends Component {
 }
 
 Field.PropTypes = {
-  placeholder: React.PropTypes.string.isRequired,
-  name: React.PropTypes.string.isRequired,
-  type: React.PropTypes.string.isRequired,
-  value: React.PropTypes.string,
-  validate: React.PropTypes.func,
-  onChange: React.PropTypes.func.isRequired
+  placeholder: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
+  value: PropTypes.string,
+  validate: PropTypes.func,
+  onChange: PropTypes.func.isRequired
 }
 
 export default Field

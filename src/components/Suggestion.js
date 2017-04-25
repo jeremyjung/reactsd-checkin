@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import CheckInButton from './CheckInButton'
 
 const Suggestion = ({ toggleCheckIn, suggestion }) => {
@@ -15,8 +16,8 @@ const Suggestion = ({ toggleCheckIn, suggestion }) => {
 }
 
 Suggestion.PropTypes = {
-  toggleCheckIn: React.PropTypes.func.isRequired,
-  suggestion: React.PropTypes.func.isRequired
+  toggleCheckIn: PropTypes.func.isRequired,
+  suggestion: PropTypes.func.isRequired
 }
 
 export default Suggestion

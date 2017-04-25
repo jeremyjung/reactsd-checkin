@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import RegisterForm from '../RegisterForm'
 import { withRouter } from 'react-router-dom'
 import base from '../../base'
@@ -21,7 +22,7 @@ class RegisterPage extends Component {
     base.update(`protectedMembers/${result.key}`, {
       data: { email: person.email }
     })
-    this.props.push(`/register/complete/${person.name}`)
+    this.props.history.push(`/register/complete/${person.name}`)
   }
 
   render() {
@@ -34,7 +35,8 @@ class RegisterPage extends Component {
 }
 
 RegisterPage.PropTypes = {
-  match: React.PropTypes.object.isRequired
+  match: PropTypes.object.isRequired,
+  history: PropTypes.object.isRequired
 }
 
 const RegisterPageWithRouter = withRouter(RegisterPage)

@@ -1,4 +1,5 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import Field from './formHelpers/Field'
 
 class RegisterForm extends Component {
@@ -76,13 +77,13 @@ class RegisterForm extends Component {
 
         <button className='register-button' type='submit' disabled={this.validate()}>Register</button>
       </form>
-    );
+    )
   }
 }
 
 RegisterForm.PropTypes = {
-  name: React.PropTypes.string.isRequired,
-  registerPerson: React.PropTypes.object.isRequired
+  name: PropTypes.string.isRequired,
+  registerPerson: PropTypes.object.isRequired
 }
 
 export default RegisterForm

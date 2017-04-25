@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 const CheckInButton = ({checkedIn, toggleCheckIn}) => {
 
@@ -20,8 +21,8 @@ const CheckInButton = ({checkedIn, toggleCheckIn}) => {
 }
 
 CheckInButton.PropTypes = {
-  checkedIn: React.PropTypes.object.isRequired,
-  toggleCheckIn: React.PropTypes.func.isRequired
+  checkedIn: PropTypes.object.isRequired,
+  toggleCheckIn: PropTypes.func.isRequired
 }
 
 export default CheckInButton

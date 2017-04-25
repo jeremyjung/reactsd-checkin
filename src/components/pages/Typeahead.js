@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { withRouter } from 'react-router-dom'
 import Suggestions from '../Suggestions'
 import base from '../../base'
@@ -46,7 +47,7 @@ class Typeahead extends Component {
   }
 
   handleRegistration (name) {
-    this.props.push(`/register/${name}`)
+    this.props.history.push(`/register/${name}`)
   }
 
   handleSubmit (event) {
@@ -104,7 +105,7 @@ class Typeahead extends Component {
 }
 
 Typeahead.PropTypes = {
-  push: React.PropTypes.func.isRequired
+  history: PropTypes.object.isRequired
 }
 
 const TypeaheadWithRouter = withRouter(Typeahead)

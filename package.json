@@ -6,14 +6,15 @@
     "firebase-admin": "^4.1.1",
     "gh-pages": "^0.12.0",
     "node-fetch": "^1.6.3",
-    "react-scripts": "0.8.5"
+    "react-scripts": "0.9.5"
   },
   "dependencies": {
-    "re-base": "^2.5.2",
-    "react": "^15.4.2",
-    "react-dom": "^15.4.2",
-    "react-router": "v4.0.0-beta.2",
-    "react-router-dom": "next"
+    "prop-types": "^15.5.8",
+    "re-base": "^2.7.0",
+    "react": "^15.5.4",
+    "react-dom": "^15.5.4",
+    "react-router": "^v4.1.1",
+    "react-router-dom": "^v4.1.1"
   },
   "scripts": {
     "start": "react-scripts start",
